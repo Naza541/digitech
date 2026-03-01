@@ -1,0 +1,90 @@
+body {
+  height: 100vh;
+  background-color: rgb(228, 163, 44);
+}
+
+.container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 50px 100px 100px;
+}
+
+.right {
+  flex-direction: row;
+  align-items: start;
+  padding: 50px;
+  text-align: center;
+  font-family: Verdana;
+  color: black;
+}
+
+p {
+  font-size: 18px;
+  font-family: Verdana;
+  color: black;
+}
+
+h1 {
+  font-size: 40px;
+  font-family: Verdana;
+  color: black;
+  margin: 0;
+}
+
+h3 {
+  font-family: Verdana;
+  font-size: 25px;
+  margin: 0px;
+  color: white;
+}
+
+h4 {
+  font-family: Verdana;
+  font-size: 11px;
+  margin: 14px 0 0 0;
+  color: black;
+}
+
+h2 {
+  font-family: Verdana;
+  font-size: 40px;
+  color: black;
+  margin: 10px 0 5px 0;
+}
+
+img {
+  border-radius: 200%;
+  background-color: rgb(228, 163, 44);
+  margin: 0;
+}
+
+button {
+  background-color: black;
+  border-radius: 5px;
+  border-left: 20px;
+  padding: 10px;
+  color: white;
+  margin: 10px;
+  cursor: grab;
+}
+
+.button1 {
+  border-radius: 7px;
+  padding: 0px 30px 0px 30px;
+  margin: 10px 0 0 0;
+}
+
+.name {
+  margin: 5px 0 0 0;
+}
+.subname {
+  margin: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  margin: 10px;
+}
