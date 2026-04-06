@@ -1,70 +1,61 @@
   const form = document.querySelector('#validationForm');
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const isValid = true;
-
-    if (!isValid)
-        document.getElementById('validationForm').textContent = 'Form submission failed. Please correct the errors and try again.';
-    else
-        document.getElementById('validationForm').textContent = 'Form submitted successfully!';
-  });
-
-    
     const username = document.querySelector('#username');
     const email = document.querySelector('#email');
     const password = document.querySelector('#password');
+    const results = document.querySelector('#result');
 
-    document.getElementById('usernameError').textContent = '';
-    document.getElementById('emailError').textContent = '';
-    document.getElementById('passwordError').textContent = '';
-
-username.addEventListener('focus',() => {
-    document.getElementById('usernameError').textContent = '';
-
-    if (username.value.trim() === '') {
-      document.getElementById('usernameError').textContent = '*Username is required.';
-    } else if (username.value.trim().length < 6) {
-      document.getElementById('usernameError').textContent = '*Username must be at least 6 characters long.';
-      isValid = false;
+const validateForm = (username, email, password) => {
+    const errors = {};
+    // handle username error
+    if (!username.trim()) { 
+        errors.username = 'Please enter a username.';
+    } else if (username.trim().length < 6) {
+        errors.username = 'Username must be at least 6 characters long.';
     }
 
-});
-
-email.addEventListener('focus',() => {
-    document.getElementById('emailError').textContent = '';
-    if (email.value.trim() === '') {
-      document.getElementById('emailError').textContent = '*Email is required.';
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email.value)) {
-      document.getElementById('emailError').textContent = '*Email is invalid. It must contain "@" and ".com"';
-      isValid = false;
+    // handle email error
+    if (!email.trim()) {
+        errors.email = 'Please enter an email.';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+        errors.email = 'Email is invalid. It must contain "@" and ".com".';
     }
 
-});
-
-password.addEventListener('focus',() => {
-    document.getElementById('passwordError').textContent = '';
-    if (password.value.trim() === '') {
-      document.getElementById('passwordError').textContent = '*Password is required.'; 
-      isValid = false;
-    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(password.value)) {
-      document.getElementById('passwordError').textContent = '*Password is invalid. It must be at least 8 characters long and include uppercase letters, lowercase letters, numbers, and special characters.';
-      isValid = false;
+    // handle password error
+    if (!password.trim()) {
+        errors.password = 'Please enter a password.';
+    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(password)) {
+        errors.password = 'Password is invalid. It must be at least 8 characters long and include uppercase letters, lowercase letters, numbers, and special characters.';
     }
+
+    return errors;
+
+}
+
+
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const errors = validateForm(username.value, email.value, password.value);
+
+    console.log(errors);
+    // display errors
+    document.getElementById('usernameError').textContent = errors.username || '';
+    document.getElementById('emailError').textContent = errors.email || '';
+    document.getElementById('passwordError').textContent = errors.password || ''; 
+
+    if (Object.keys(errors).length === 0) {
+        // document.getElementById('validationForm').textContent = 'Form submitted successfully!';
+        // display data
+        console.log(results);
+        results.innerHTML = `<h2>Submitted Data:</h2>
+                             <p><strong>Username:</strong> ${username.value}</p>
+                             <p><strong>Email:</strong> ${email.value}</p>
+                             <p><strong>Password:</strong> ${password.value}</p>`;
+                             
+    }
+    // clear form fields
+    if(!errors.username && !errors.email && !errors.password){
+    username.value = '';
+    email.value = '';
+    password.value = '';
+  }
 });
-
-username.addEventListener('input',() => {
-      document.getElementById('usernameError').textContent = '';
-
-    });
-
-email.addEventListener('input',() => {
-        document.getElementById('emailError').textContent = '';
-    });
-
-password.addEventListener('input',() => {
-        document.getElementById('passwordError').textContent = '';
-    });
-
-
